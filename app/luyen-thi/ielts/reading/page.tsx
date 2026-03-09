@@ -1,5 +1,21 @@
 import Link from "next/link";
 
+const availableTests = [
+  {
+    id: "cam17-test1",
+    source: "Cambridge IELTS 17",
+    test: "Test 1",
+    level: "Academic",
+    passages: [
+      { title: "The Frozen Ark", questions: 13 },
+      { title: "How child-friendly is your city?", questions: 13 },
+      { title: "The power of Grit", questions: 14 },
+    ],
+    duration: "60 phút",
+    href: "/luyen-thi/ielts/reading/cam17-test1",
+  },
+];
+
 const features = [
   {
     icon: "📄",
@@ -91,8 +107,54 @@ export default function ReadingPage() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Reading Tests */}
       <section className="py-14 px-4 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 text-center">
+            Đề thi IELTS Reading
+          </h2>
+          <p className="text-center text-gray-500 text-sm mb-8">Luyện tập với đề thi thật từ bộ Cambridge IELTS</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {availableTests.map((test) => (
+              <Link key={test.id} href={test.href} className="block group">
+                <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:border-[#e54d4c] hover:shadow-md transition-all">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <span className="inline-block bg-red-50 text-[#e54d4c] text-xs font-bold px-2.5 py-1 rounded-full mb-2">
+                        {test.source}
+                      </span>
+                      <h3 className="font-bold text-gray-900 text-base">{test.test} — {test.level}</h3>
+                    </div>
+                    <span className="text-xs text-gray-400 flex-shrink-0 mt-1">{test.duration}</span>
+                  </div>
+                  <div className="space-y-2 mb-4">
+                    {test.passages.map((p, i) => (
+                      <div key={i} className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">
+                          <span className="font-medium text-gray-400 mr-2">P{i + 1}</span>
+                          {p.title}
+                        </span>
+                        <span className="text-gray-400 flex-shrink-0 ml-2">{p.questions} câu</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-400">
+                      {test.passages.reduce((a, p) => a + p.questions, 0)} câu hỏi · {test.passages.length} bài đọc
+                    </span>
+                    <span className="text-[#e54d4c] text-sm font-semibold group-hover:underline">
+                      Làm bài →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-14 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-8 text-center">
             Tính năng nổi bật
